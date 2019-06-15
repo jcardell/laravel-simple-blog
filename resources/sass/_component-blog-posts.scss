@@ -1,0 +1,6 @@
+.blog-posts {
+  &__item + &__item,
+  &__pagination {
+    margin-top: 15px;
+  }
+}
