@@ -9,18 +9,24 @@
         <h6 class="card-subtitle mb-2 text-muted">Posted by {{ $userName }}</h6>
         <p class="card-text">{{ $content }}</p>
 
-        <a class="card-link" href="{{ route('blog.index') }}">Return</a>
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                @can('update', $blogPost)
+                    <a class="card-link" href="{{ route('blog.edit', ['blogPost' => $blogPost->id]) }}">Edit</a>
+                @endcan
 
-        @can('update', $blogPost)
-            <a class="card-link btn btn-primary" href="{{ route('blog.edit', ['blogPost' => $blogPost->id]) }}">Edit</a>
-        @endcan
+                @can('delete', $blogPost)
+                    <a class="card-link text-danger" href="{{ route('blog.index') }}" onclick="event.preventDefault();document.getElementById('delete-blog-post-{{ $blogPost->id }}').submit()">Delete</a>
+                    <form id="delete-blog-post-{{ $blogPost->id }}" class="card-link d-inline-block hide" action="{{ route('blog.delete', ['blogPost' => $blogPost->id]) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                    </form>
+                @endcan
+            </div>
 
-        @can('delete', $blogPost)
-            <form class="card-link d-inline-block" action="{{ route('blog.delete', ['blogPost' => $blogPost->id]) }}" method="POST">
-                @method('DELETE')
-                @csrf
-                <input class="btn btn-danger" type="submit" value="Delete" onclick="confirm('Are you sure you want to delete this blog post?')">
-            </form>
-        @endcan
+            @if($showReturn)
+                <a class="card-link" href="{{ route('blog.index') }}">Return</a>
+            @endif
+        </div>
     </div>
 </div>

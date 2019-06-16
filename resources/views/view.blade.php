@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @component('components.blog-post', ['blogPost' => $blogPost])
+    @component('components.blog-post', ['blogPost' => $blogPost, 'showReturn' => true])
         @if($blogPost->post_image)
             @slot('image')
                 {{ $blogPost->post_image }}

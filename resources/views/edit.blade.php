@@ -34,9 +34,11 @@
                     <label for="post_image">Image</label>
                     <input type="file" class="form-control-file" id="post_image" name="post_image">
                 </div>
-                <div class="form-group">
+                <div class="form-group d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <input class="card-link btn btn-primary" type="submit" value="Save">
+                    </div>
                     <a class="card-link" href="{{ route('blog.index') }}">Return</a>
-                    <input class="card-link btn btn-primary" type="submit" value="Save">
                 </div>
             </form>
         </div>

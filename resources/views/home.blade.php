@@ -4,7 +4,7 @@
     <div class="blog-posts">
         @foreach ($blogPosts as $blogPost)
             <div class="blog-posts__item">
-                @component('components.blog-post', ['blogPost' => $blogPost])
+                @component('components.blog-post', ['blogPost' => $blogPost, 'showReturn' => false])
                     @if($blogPost->post_image)
                         @slot('image')
                             {{ $blogPost->post_image }}
