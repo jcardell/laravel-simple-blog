@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 require('./richeditor');
+require('./blog-post');
 
 
 // window.Vue = require('vue');
