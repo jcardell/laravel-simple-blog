@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class BlogPost extends Model
 {
+    public static $rules = [
+        'title' => 'required|max:100',
+        'excerpt' => 'required|min:40|max:65535',
+        'content_html' => 'required|min:40|max:4294967295'
+    ];
+
     /**
      * The attributes that are mass assignable.
      *

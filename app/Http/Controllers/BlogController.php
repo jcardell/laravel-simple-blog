@@ -11,13 +11,6 @@ use Illuminate\Support\Facades\Validator;
 class BlogController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct() {}
-
-    /**
      * Show the blog posts.
      *
      * @return \Illuminate\Contracts\Support\Renderable
@@ -70,11 +63,7 @@ class BlogController extends Controller
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'title' => 'required|max:100',
-            'excerpt' => 'required|min:40|max:65535',
-            'content_html' => 'required|min:40|max:4294967295'
-        ]);
+        $validator = Validator::make($data, BlogPost::$rules);
 
         if ($validator->fails()) {
             return redirect(route('blog.create'))
@@ -106,11 +95,7 @@ class BlogController extends Controller
     {
         $data = $request->all();
 
-        $validator = Validator::make($data, [
-            'title' => 'required|max:100',
-            'excerpt' => 'required|min:40|max:65535',
-            'content_html' => 'required|min:40|max:4294967295'
-        ]);
+        $validator = Validator::make($data, BlogPost::$rules);
 
         if ($validator->fails()) {
             return redirect(route('blog.edit', ['blogPost' => $blogPost->id]))
