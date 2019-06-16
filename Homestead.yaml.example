@@ -7,13 +7,13 @@ keys:
     - ~/.ssh/id_rsa
 folders:
     -
-        map: 'CHANGE_THIS'
+        map: CHANGE_THIS
         to: /home/vagrant/code
 sites:
     -
-        map: homestead.test
+        map: laravel-simple-blog.test
         to: /home/vagrant/code/public
 databases:
-    - homestead
-name: laravel
-hostname: laravel
+    - laravel-simple-blog
+name: laravel-simple-blog
+hostname: laravel-simple-blog
