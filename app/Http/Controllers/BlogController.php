@@ -88,7 +88,7 @@ class BlogController extends Controller
     {
         $data = $request->validated();
 
-        if ($request->file('post_image')) {
+        if ($request->hasFile('post_image')) {
             Storage::delete($blogPost->post_image);
             $data['post_image'] = $request->post_image->store('public');
         }
