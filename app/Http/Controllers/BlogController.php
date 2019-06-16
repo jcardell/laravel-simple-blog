@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\BlogPost;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBlogPost;
+use App\Http\Requests\UpdateBlogPost;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
@@ -35,7 +35,8 @@ class BlogController extends Controller
     /**
      * Displays a blog post.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param BlogPost $blogPost
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function view(BlogPost $blogPost)
     {
@@ -56,22 +57,14 @@ class BlogController extends Controller
     /**
      * Creates a blog post.
      *
-     * @param Request $request
+     * @param StoreBlogPost $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function post(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
-        $validator = Validator::make($data, BlogPost::$rules);
-
-        if ($validator->fails()) {
-            return redirect(route('blog.create'))
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        if ($request->file('post_image')) {
+        if ($request->hasFile('post_image')) {
             $data['post_image'] = $request->post_image->store('public');
         }
         $data['user_id'] = Auth::id();
@@ -87,21 +80,13 @@ class BlogController extends Controller
     /**
      * Updates a blog post.
      *
-     * @param Request $request
+     * @param UpdateBlogPost $request
      * @param BlogPost $blogPost
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function put(Request $request, BlogPost $blogPost)
+    public function update(UpdateBlogPost $request, BlogPost $blogPost)
     {
-        $data = $request->all();
-
-        $validator = Validator::make($data, BlogPost::$rules);
-
-        if ($validator->fails()) {
-            return redirect(route('blog.edit', ['blogPost' => $blogPost->id]))
-                ->withErrors($validator)
-                ->withInput();
-        }
+        $data = $request->validated();
 
         if ($request->file('post_image')) {
             Storage::delete($blogPost->post_image);

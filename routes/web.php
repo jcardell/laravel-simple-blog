@@ -18,6 +18,6 @@ Route::get('/create', 'BlogController@create')->name('blog.create')->middleware(
 Route::get('/edit/{blogPost}', 'BlogController@edit')->name('blog.edit')->middleware('can:update,blogPost');
 Route::get('/view/{blogPost}', 'BlogController@view')->name('blog.view');
 
-Route::post('/blog-post', 'BlogController@post')->name('blog.post')->middleware('auth');
+Route::post('/blog-post', 'BlogController@store')->name('blog.post');
+Route::put('/blog-post/{blogPost}', 'BlogController@update')->name('blog.put');
 Route::delete('/blog-post/{blogPost}', 'BlogController@delete')->name('blog.delete')->middleware('can:delete,blogPost');
-Route::put('/blog-post/{blogPost}', 'BlogController@put')->name('blog.put')->middleware('can:update,blogPost');
