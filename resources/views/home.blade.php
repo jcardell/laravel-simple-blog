@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('meta_title')
+    {{ config('app.name') }}
+@endsection
+
 @section('content')
     <div class="blog-posts">
         @foreach ($blogPosts as $blogPost)

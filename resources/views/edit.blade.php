@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('meta_title')
+    {{ __('blog.edit_post') . ' - ' . config('app.name') }}
+@endsection
+
 @section('content')
     <div class="card">
         <div class="card-header">

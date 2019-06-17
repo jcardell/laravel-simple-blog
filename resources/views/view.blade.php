@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('meta_title')
+    {{ $blogPost->title }}
+@endsection
+
 @section('content')
     @component('components.blog-post', ['blogPost' => $blogPost, 'showReturn' => true])
         @if($blogPost->post_image)
